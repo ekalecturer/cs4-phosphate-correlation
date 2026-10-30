@@ -1,0 +1,20 @@
+{
+  "note": "Uses the paper's REAL distributions (Table 6) and REAL correlation matrix (Table 7, corrected for positive semi-definiteness) via a Gaussian copula. Does NOT reproduce the paper's exact cash-flow mechanics (depreciation/depletion/royalty schedules not disclosed) -- uses a transparent margin-and-annuity scaling proxy off the real $2.26B base case instead. Reproduces the DIRECTION of the paper's core finding (correlation widens the risk spread) but not the magnitude of the reported 34 percent mean uplift. See notebook section 5 for full disclosure.",
+  "correlated_run": {
+    "mean_npv_usd_billion": 2.19,
+    "std_dev_npv_usd_billion": 0.78,
+    "p5_npv_usd_billion": 1.04,
+    "p95_npv_usd_billion": 3.58
+  },
+  "independent_run": {
+    "mean_npv_usd_billion": 2.18,
+    "std_dev_npv_usd_billion": 0.73,
+    "p5_npv_usd_billion": 1.08,
+    "p95_npv_usd_billion": 3.47
+  },
+  "comparison_to_paper": {
+    "paper_scenario_4_mean_npv_usd_billion": 3.04,
+    "paper_scenario_4_ci_low_usd_billion": 0.00,
+    "paper_scenario_4_ci_high_usd_billion": 5.94
+  }
+}

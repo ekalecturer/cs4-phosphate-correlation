@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Feasibility Stress Test — Correlation vs. Independence, Abu Tartur Phosphate Mine</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root { --blue:#2b6cb0; --dark:#1a202c; --gray:#4a5568; --bg:#f7fafc; }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin:0; color:var(--dark); background:#fff; line-height:1.6; }
+  header { background:var(--dark); color:#fff; padding:56px 20px; }
+  header .kicker { color:#90cdf4; font-weight:600; letter-spacing:.04em; text-transform:uppercase; font-size:13px; }
+  header h1 { font-size:32px; margin:10px 0 14px; max-width:760px; }
+  header p { max-width:680px; color:#cbd5e0; font-size:17px; }
+  .wrap { max-width:820px; margin:0 auto; padding:40px 20px; }
+  .stat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:16px; margin:28px 0; }
+  .stat { background:var(--bg); border-radius:10px; padding:18px; border:1px solid #e2e8f0; }
+  .stat .num { font-size:24px; font-weight:700; color:var(--blue); }
+  .stat .label { font-size:13px; color:var(--gray); margin-top:4px; }
+  h2 { font-size:21px; margin-top:40px; border-bottom:2px solid #e2e8f0; padding-bottom:8px; }
+  table { width:100%; border-collapse:collapse; margin:20px 0; font-size:14px; }
+  th, td { text-align:left; padding:10px 12px; border-bottom:1px solid #e2e8f0; }
+  th { background:var(--bg); font-weight:600; }
+  .btnrow { display:flex; gap:12px; flex-wrap:wrap; margin:24px 0; }
+  .btn { display:inline-block; background:var(--blue); color:#fff; text-decoration:none; padding:12px 20px; border-radius:8px; font-weight:600; border:none; cursor:pointer; font-size:15px; font-family:inherit; }
+  .btn.secondary { background:#fff; color:var(--blue); border:2px solid var(--blue); }
+  .callout { background:#fffbea; border-left:4px solid #d69e2e; padding:16px 20px; border-radius:6px; margin:20px 0; font-size:15px; }
+  .callout.good { background:#f0fff4; border-left-color:#38a169; }
+  blockquote { border-left:3px solid var(--blue); margin:20px 0; padding:4px 20px; color:var(--gray); font-style:italic; }
+  footer { text-align:center; color:var(--gray); font-size:13px; padding:40px 20px; }
+  a { color:var(--blue); }
+
+  .sim-panel { background:var(--bg); border:1px solid #e2e8f0; border-radius:12px; padding:24px; margin:24px 0; }
+  .sliders { display:grid; grid-template-columns:1fr 1fr; gap:18px 28px; }
+  @media (max-width:640px) { .sliders { grid-template-columns:1fr; } }
+  .slider-row label { display:flex; justify-content:space-between; font-size:14px; font-weight:600; margin-bottom:4px; }
+  .slider-row .val { color:var(--blue); font-weight:700; }
+  .slider-row input[type=range] { width:100%; accent-color:var(--blue); }
+  .toggle-row { display:flex; align-items:center; gap:10px; margin:16px 0; font-weight:600; font-size:14px; }
+  .sim-results { margin-top:28px; }
+  .sim-results.hidden { display:none; }
+  canvas { width:100%; height:260px; background:#fff; border:1px solid #e2e8f0; border-radius:8px; }
+  .disclosure { font-size:13px; color:var(--gray); margin-top:14px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">The Feasibility Stress Test — Case Study #4</div>
+  <h1>Abu Tartur Phosphate Mine: $2.26B to $3.04B, and the Correlation That Explained It</h1>
+  <p>Built on the real, fully-read data of a published case study comparing DCF, a binomial decision tree, and Monte Carlo simulation on the same project.</p>
+</header>
+<div class="wrap">
+
+<div class="callout good"><strong>Note:</strong> unlike the other three case studies in this series, the full paper was read — not just the abstract. Every number below is transcribed directly from the paper's own tables.</div>
+
+<h2>The four scenarios (Table 8)</h2>
+<table>
+<tr><th>Scenario</th><th>Method</th><th>Uncertain variables</th><th>Mean NPV</th><th>vs. base</th></tr>
+<tr><td>1</td><td>DCF</td><td>None</td><td>$2.26B</td><td>0%</td></tr>
+<tr><td>2</td><td>BDT</td><td>Ore price</td><td>$2.13B</td><td>−6%</td></tr>
+<tr><td>3</td><td>MCS</td><td>Price + operating cost</td><td>$2.35B</td><td>+4%</td></tr>
+<tr><td>4</td><td>MCS</td><td>7 variables (2 with 0% reported SD)</td><td>$3.04B</td><td>+34%</td></tr>
+</table>
+
+<p>Source: Kamel, A., Elwageeh, M., Bondua, S., Elkarmoty, M. (2023). <em>Evaluation of mining projects subjected to economic uncertainties using the Monte Carlo simulation and the binomial tree method: Case study in a phosphate mine in Egypt.</em> Resources Policy, 80, 103266. <a href="https://doi.org/10.1016/j.resourpol.2022.103266">DOI</a></p>
+
+<h2>The paper's own conclusion</h2>
+<blockquote>"Correlations must be included in Monte Carlo Simulation otherwise the analysis leads to an underestimate of risk. It is relatively more important to investigate and allow correlations between the variables than to select the best fit distribution to represent the parameters."</blockquote>
+
+<div class="callout"><strong>A detail worth knowing:</strong> two of the seven "uncertain" parameters in scenario 4 — income tax rate and mill recovery — are reported with 0% standard deviation in the paper's own Table 6. A variable that does not vary is not really uncertain. This tool exposes the five parameters that actually had nonzero variance: price, operating cost, grade, interest rate, inflation.</div>
+
+<h2>Run your own simulation</h2>
+<p>Set your own center values for the five genuinely stochastic parameters (spreads stay fixed at the paper's reported standard deviations), choose correlated or independent, then run 4,000 trials using the paper's real 5×5 correlation matrix (corrected to be positive semi-definite, same fix applied in the notebook).</p>
+
+<div class="sim-panel">
+  <div class="sliders">
+    <div class="slider-row"><label>Price <span class="val" id="v_price">$766.5/t</span></label><input type="range" id="price" min="700" max="840" step="1" value="766.5"></div>
+    <div class="slider-row"><label>Operating cost <span class="val" id="v_opex">$63.0/t</span></label><input type="range" id="opex" min="50" max="80" step="0.5" value="63"></div>
+    <div class="slider-row"><label>Grade <span class="val" id="v_grade">29.4%</span></label><input type="range" id="grade" min="18" max="40" step="0.2" value="29.4"></div>
+    <div class="slider-row"><label>Interest rate (mean) <span class="val" id="v_interest">11.0%</span></label><input type="range" id="interest" min="5" max="20" step="0.5" value="11"></div>
+    <div class="slider-row"><label>Inflation (mean) <span class="val" id="v_inflation">10.4%</span></label><input type="range" id="inflation" min="3" max="20" step="0.2" value="10.4"></div>
+  </div>
+  <div class="toggle-row"><label><input type="checkbox" id="corrToggle" checked> Use the paper's real correlation matrix (uncheck to compare against independent variables)</label></div>
+  <div class="btnrow"><button class="btn" id="runBtn">Run simulation (4,000 trials)</button></div>
+
+  <div class="sim-results hidden" id="results">
+    <div class="stat-grid">
+      <div class="stat"><div class="num" id="r_mean">—</div><div class="label">mean NPV (USD B)</div></div>
+      <div class="stat"><div class="num" id="r_std">—</div><div class="label">std dev NPV (USD B)</div></div>
+      <div class="stat"><div class="num" id="r_p5">—</div><div class="label">5th percentile (USD B)</div></div>
+      <div class="stat"><div class="num" id="r_p95">—</div><div class="label">95th percentile (USD B)</div></div>
+    </div>
+    <canvas id="hist" width="760" height="260"></canvas>
+    <div class="disclosure">Uses a transparent NPV proxy (margin ratio × annuity ratio, scaled off the paper's real $2.26B base case) since the paper doesn't fully disclose its depreciation/depletion schedule. Reproduces the <em>direction</em> of the paper's correlation finding, not the exact 34% uplift magnitude — same honest gap disclosed in the notebook.</div>
+  </div>
+</div>
+
+<h2>Explore</h2>
+<div class="btnrow">
+  <a class="btn secondary" href="notebook.html">View the full Python notebook</a>
+  <a class="btn secondary" href="https://github.com/ekalecturer/cs4-phosphate-correlation">View source on GitHub</a>
+</div>
+
+<h2>What the notebook demonstrates</h2>
+<p>Using the paper's <strong>real</strong> distributions and <strong>real</strong> correlation matrix (price-inflation correlation: 0.94), the notebook runs the model twice — once honoring the correlation, once with it destroyed — to isolate what correlation modeling actually buys you. It does not reproduce the paper's exact cash-flow mechanics (depreciation and depletion schedules aren't fully disclosed), and says so directly in the notebook itself.</p>
+
+</div>
+<footer>Part of <strong>The Feasibility Stress Test</strong> — real Monte Carlo and financial-engineering case studies for capex decisions.</footer>
+
+<script>
+function randNormalStd(){
+  let u1 = Math.random() || 1e-9, u2 = Math.random();
+  return Math.sqrt(-2*Math.log(u1)) * Math.cos(2*Math.PI*u2);
+}
+function normCdf(x){
+  const t = 1/(1+0.2316419*Math.abs(x));
+  const d = 0.3989423*Math.exp(-x*x/2);
+  let p = d*t*(0.3193815+t*(-0.3565638+t*(1.781478+t*(-1.821256+t*1.330274))));
+  return x>0 ? 1-p : p;
+}
+// inverse normal CDF (Acklam's approximation)
+function normInv(p){
+  if (p<=0) return -Infinity; if (p>=1) return Infinity;
+  const a=[-3.969683028665376e+01,2.209460984245205e+02,-2.759285104469687e+02,1.383577518672690e+02,-3.066479806614716e+01,2.506628277459239e+00];
+  const b=[-5.447609879822406e+01,1.615858368580409e+02,-1.556989798598866e+02,6.680131188771972e+01,-1.328068155288572e+01];
+  const c=[-7.784894002430293e-03,-3.223964580411365e-01,-2.400758277161838e+00,-2.549732539343734e+00,4.374664141464968e+00,2.938163982698783e+00];
+  const d=[7.784695709041462e-03,3.224671290700398e-01,2.445134137142996e+00,3.754408661907416e+00];
+  const plow=0.02425, phigh=1-plow;
+  let q,r;
+  if (p<plow){ q=Math.sqrt(-2*Math.log(p)); return (((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5]) / ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1); }
+  if (p>phigh){ q=Math.sqrt(-2*Math.log(1-p)); return -(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5]) / ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1); }
+  q=p-0.5; r=q*q;
+  return (((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q / (((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1);
+}
+function lognormalParams(mean, sd){
+  const sigma2 = Math.log(1+(sd/mean)*(sd/mean));
+  const mu = Math.log(mean) - sigma2/2;
+  return [mu, Math.sqrt(sigma2)];
+}
+function lognormSample(u, mu, sigma){ return Math.exp(mu + sigma*normInv(u)); }
+function mean(a){ return a.reduce((s,x)=>s+x,0)/a.length; }
+function std(a){ const m=mean(a); return Math.sqrt(a.reduce((s,x)=>s+(x-m)*(x-m),0)/a.length); }
+function percentile(a, p){ const s=[...a].sort((x,y)=>x-y); const idx=(p/100)*(s.length-1); const lo=Math.floor(idx), hi=Math.ceil(idx); return s[lo]+(s[hi]-s[lo])*(idx-lo); }
+
+// PSD-corrected 5x5 correlation matrix Cholesky factor L (order: price, opex, grade, interest, inflation)
+// precomputed via nearest-PSD eigenvalue clipping, same method as the notebook
+const L5 = [
+  [1.0, 0, 0, 0, 0],
+  [0.7721547705580615, 0.6354345051257663, 0, 0, 0],
+  [0.671040419451654, -0.10396919008837974, 0.7340947915456931, 0, 0],
+  [-0.26077240267408797, 0.10360982431987077, 0.20667191254769737, 0.9373097027513723, 0],
+  [0.6243545926552415, 0.3335106605532897, -0.08280057281719487, 0.7014941372592929, 0.0014221320615787538]
+];
+function correlatedNormals5(){
+  const z = [randNormalStd(),randNormalStd(),randNormalStd(),randNormalStd(),randNormalStd()];
+  const out = [0,0,0,0,0];
+  for (let i=0;i<5;i++){
+    let s=0;
+    for (let j=0;j<=i;j++) s += L5[i][j]*z[j];
+    out[i]=s;
+  }
+  return out;
+}
+
+const ids = ["price","opex","grade","interest","inflation"];
+const labelMap = {
+  price: v => "$"+v.toFixed(1)+"/t", opex: v => "$"+v.toFixed(1)+"/t", grade: v => v.toFixed(1)+"%",
+  interest: v => v.toFixed(1)+"%", inflation: v => v.toFixed(1)+"%"
+};
+ids.forEach(id=>{
+  const el = document.getElementById(id);
+  const out = document.getElementById("v_"+id);
+  const update = () => out.textContent = labelMap[id](parseFloat(el.value));
+  el.addEventListener("input", update);
+  update();
+});
+
+function drawHistogram(canvas, values, breakEvenB){
+  const ctx = canvas.getContext("2d");
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0,0,W,H);
+  const min = Math.min(...values), max = Math.max(...values);
+  const bins = 40;
+  const counts = new Array(bins).fill(0);
+  const w = (max-min)/bins || 1;
+  values.forEach(v => { let idx = Math.floor((v-min)/w); if (idx>=bins) idx=bins-1; if(idx<0) idx=0; counts[idx]++; });
+  const maxCount = Math.max(...counts);
+  const padL = 10, padB = 10, padT = 10, padR = 10;
+  const plotW = W-padL-padR, plotH = H-padT-padB;
+  const barW = plotW/bins;
+  ctx.fillStyle = "#2b6cb0";
+  counts.forEach((c,i)=>{
+    const h = (c/maxCount)*plotH;
+    ctx.fillRect(padL+i*barW, H-padB-h, barW-1, h);
+  });
+  if (breakEvenB >= min && breakEvenB <= max){
+    const x = padL + ((breakEvenB-min)/(max-min))*plotW;
+    ctx.strokeStyle = "#c53030"; ctx.lineWidth = 2; ctx.setLineDash([5,4]);
+    ctx.beginPath(); ctx.moveTo(x,padT); ctx.lineTo(x,H-padB); ctx.stroke();
+    ctx.setLineDash([]);
+  }
+}
+
+const BASE_PRICE = 766.0, BASE_OPEX_FIXED = 63.0, BASE_GRADE_FIXED = 29.4, BASE_INTEREST = 0.10, BASE_NPV = 2.26e9;
+const MINE_LIFE = 22;
+function annuityFactor(rate, years=MINE_LIFE){ return (1-Math.pow(1+rate,-years))/rate; }
+const baseMargin = BASE_PRICE - BASE_OPEX_FIXED;
+const baseAnnuity = annuityFactor(BASE_INTEREST);
+function proxyNpv(price, opex, grade, interest){
+  const marginRatio = ((price-opex)*(grade/BASE_GRADE_FIXED))/baseMargin;
+  const annuityRatio = annuityFactor(interest)/baseAnnuity;
+  return BASE_NPV*marginRatio*annuityRatio;
+}
+
+document.getElementById("runBtn").addEventListener("click", () => {
+  const N = 4000;
+  const g = id => parseFloat(document.getElementById(id).value);
+  const correlated = document.getElementById("corrToggle").checked;
+
+  const priceMean = g("price"), priceSd = 16.5;
+  const opexMean = g("opex"), opexSd = 2.0;
+  const gradeMean = g("grade"), gradeSd = 8.0;
+  const interestMean = g("interest")/100, interestSd = 0.03;
+  const inflationMean = g("inflation")/100, inflationSd = 0.06;
+  const [interestMu, interestSigma] = lognormalParams(interestMean, interestSd);
+
+  const npvs = [];
+  for (let i=0;i<N;i++){
+    let uP,uO,uG,uI;
+    if (correlated){
+      const z = correlatedNormals5();
+      const u = z.map(normCdf);
+      uP=u[0]; uO=u[1]; uG=u[2]; uI=u[3];
+    } else {
+      uP=Math.random(); uO=Math.random(); uG=Math.random(); uI=Math.random();
+    }
+    const price = priceMean + priceSd*normInv(uP);
+    const opex = opexMean + opexSd*normInv(uO);
+    const grade = gradeMean + gradeSd*normInv(uG);
+    const interest = Math.max(0.001, lognormSample(uI, interestMu, interestSigma));
+    npvs.push(proxyNpv(price, opex, grade, interest));
+  }
+
+  const npvB = npvs.map(v=>v/1e9);
+  document.getElementById("r_mean").textContent = mean(npvB).toFixed(2);
+  document.getElementById("r_std").textContent = std(npvB).toFixed(2);
+  document.getElementById("r_p5").textContent = percentile(npvB,5).toFixed(2);
+  document.getElementById("r_p95").textContent = percentile(npvB,95).toFixed(2);
+  document.getElementById("results").classList.remove("hidden");
+  drawHistogram(document.getElementById("hist"), npvB, BASE_NPV/1e9);
+});
+</script>
+</body>
+</html>

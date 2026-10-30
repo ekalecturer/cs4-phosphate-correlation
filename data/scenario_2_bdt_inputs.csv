@@ -1,0 +1,9 @@
+parameter,value,unit
+volatility_sigma,28.5,percent
+up_factor_u,1.33,ratio
+down_factor_d,0.75,ratio
+risk_free_rate,7,percent
+stepping_time,1.0,year
+probability_pr,55,percent
+starting_price,766,USD/ton
+resulting_average_npv,2126849233,USD

@@ -1,0 +1,5 @@
+scenario,method,uncertain_variables,mean_npv_usd_billion,pct_vs_base_case,confidence_interval_low_usd_billion,confidence_interval_high_usd_billion,confidence_level_pct
+1,DCF,none,2.26,0,,,
+2,BDT,ore price,2.13,-6,,,<50
+3,MCS,"price, operating cost",2.35,4,0.00,4.26,95
+4,MCS,"price, operating cost, grade, recovery, interest rate, inflation, tax rate",3.04,34,0.00,5.94,95

@@ -1,0 +1,8 @@
+parameter,distribution,mean,standard_deviation,unit,notes
+average_price,Normal,766.5,16.5,USD/ton,
+operating_cost,Normal,63,2,USD/ton,differs from Table 3 base-case value of 60.0
+average_grade,Normal,29.4,8,percent,differs from Table 2 base-case value of 30.0
+interest_rate,Lognormal,11,3,percent,distinct from the 10 percent DCF discount rate
+inflation,Lognormal,10.4,6,percent,differs substantially from Table 3 base-case value of 3.0
+income_tax_rate,Uniform,44.55,0,percent,ZERO standard deviation despite being listed as uncertain
+mill_recovery,Normal,95,0,percent,ZERO standard deviation despite being listed as uncertain

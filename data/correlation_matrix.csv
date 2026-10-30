@@ -1,0 +1,8 @@
+,average_price,operating_cost,average_grade,interest_rate,inflation_rate,income_tax_rate,mill_recovery
+average_price,1.00,0.77,0.80,-0.45,0.94,0.66,0.30
+operating_cost,0.77,1.00,0.50,-0.22,0.88,-0.40,0.60
+average_grade,0.80,0.50,1.00,0.03,0.28,-0.08,0.05
+interest_rate,-0.45,-0.22,0.03,1.00,0.80,0.01,0.01
+inflation_rate,0.94,0.88,0.28,0.80,1.00,0.01,0.01
+income_tax_rate,0.66,-0.40,-0.08,0.01,0.01,1.00,0.01
+mill_recovery,0.30,0.60,0.05,0.01,0.01,0.01,1.00

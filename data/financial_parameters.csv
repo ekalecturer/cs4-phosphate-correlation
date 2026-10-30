@@ -1,0 +1,16 @@
+parameter,value,unit
+average_price,766.0,USD/t
+mine_operating_cost,15.0,USD/t
+mill_operating_cost,45.0,USD/t
+total_operating_cost,60.0,USD/t
+mine_capital_cost,580000000,USD
+mill_capital_cost,800000000,USD
+total_capital_cost,1380000000,USD
+working_capital,60000000,USD
+capitalized_exploration_cost,1000000,USD
+depletion_allowance,15.0,percent
+royalty_pct_net_smelter_return,5.0,percent
+income_tax_rate,46.0,percent
+salvage_value_pct_capital,10.0,percent
+discount_rate_ror,10.0,percent
+inflation,3.0,percent
